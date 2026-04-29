@@ -37,9 +37,7 @@ export const ImageCarousel: React.FC<ImageCarouselProps> = ({
     return () => window.removeEventListener('resize', updateVisibleCount);
   }, []);
 
-  if (!images.length) {
-    return null;
-  }
+  if (!images.length) return null;
 
   const total = images.length;
 
@@ -78,18 +76,20 @@ export const ImageCarousel: React.FC<ImageCarouselProps> = ({
                 className={`${styles.slide} ${isSelected ? styles.selected : ''}`}
                 onClick={() => onToggleSelect(img.download_url)}
               >
-                <Image
-                  src={img.download_url}
-                  alt={img.author}
-                  width={240}
-                  height={160}
-                  className={styles.image}
-                  loading="eager"
-                  sizes="(max-width: 639px) 82vw, (max-width: 1023px) 220px, 240px"
+                <div className={styles.imageWrapper}>
+                  <Image
+                    src={img.download_url}
+                    alt={img.author}
+                    fill
+                    className={styles.image}
+                    sizes="(max-width: 639px) 80vw, (max-width: 1023px) 220px, 240px"
+                    style={{ objectFit: 'cover' }}
+                    loading="eager"
+                  />
+                </div>
 
-                />
                 <div className={styles.overlay}></div>
-             
+                <div className={styles.caption}>{img.author}</div>
               </div>
             );
           })}
