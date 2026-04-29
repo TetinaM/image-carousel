@@ -1,0 +1,112 @@
+.carousel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin: 24px 0;
+}
+
+.viewport {
+  overflow: hidden;
+  max-width: 100%;
+}
+
+.track {
+  display: flex;
+  gap: 16px;
+  transition: transform 0.4s ease;
+}
+
+.slide {
+  position: relative;
+  flex: 0 0 auto;
+  cursor: pointer;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15);
+  transform: translateY(0);
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    border 0.25s ease;
+}
+
+.slide:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.25);
+}
+
+.image {
+  display: block;
+  width: 240px;
+  height: 160px;
+  object-fit: cover;
+}
+
+.caption {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  padding: 6px 10px;
+  font-size: 12px;
+  color: #fff;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.7),
+    rgba(0, 0, 0, 0)
+  );
+}
+
+
+.selected {
+  outline: 3px solid #ff6b6b;
+  box-shadow: 0 0 0 4px rgba(255, 107, 107, 0.3);
+}
+.navButton {
+  border: none;
+  background: rgba(15, 23, 42, 0.85);
+  color: #fff;
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.navButton:hover {
+  background: rgba(94, 234, 212, 0.95);
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 8px 18px rgba(45, 212, 191, 0.4);
+}
+
+.navButton:active {
+  transform: translateY(0) scale(0.98);
+}
+
+/* Мобильная адаптация */
+
+@media (max-width: 639px) {
+  .image {
+    width: 100vw;
+    max-width: 360px;
+    height: 220px;
+  }
+
+  .carousel {
+    gap: 8px;
+  }
+
+  .navButton {
+    width: 32px;
+    height: 32px;
+    font-size: 18px;
+  }
+}
