@@ -85,6 +85,8 @@ export const ImageCarousel: React.FC<ImageCarouselProps> = ({
                   height={160}
                   className={styles.image}
                   loading="eager"
+                  sizes="(max-width: 639px) 82vw, (max-width: 1023px) 220px, 240px"
+
                 />
                 <div className={styles.overlay}></div>
              
