@@ -13,9 +13,7 @@ export default function HomePage() {
   useEffect(() => {
     async function loadImages() {
       try {
-        const res = await fetch(
-          'https://picsum.photos/v2/list'
-        );
+        const res = await fetch('https://picsum.photos/v2/list');
         const data: PicsumImage[] = await res.json();
         setImages(data);
       } catch (e) {
@@ -42,15 +40,46 @@ export default function HomePage() {
 
   return (
     <main className={styles.main}>
-      <h1 className={styles.title}>Image Carousel</h1>
+      <div className={styles.pageGlow}></div>
 
-      <ImageCarousel
-        images={images}
-        selectedUrls={selectedUrls}
-        onToggleSelect={handleToggleSelect}
-      />
+      <section className={styles.wrapper}>
+        <div className={styles.card}>
+          <p className={styles.eyebrow}>UI Task</p>
+          <h1 className={styles.title}>Image Carousel</h1>
+          <p className={styles.subtitle}>
+            Infinite scrolling carousel with image selection and responsive layout.
+          </p>
 
-     
+          <div className={styles.carouselShell}>
+            <ImageCarousel
+              images={images}
+              selectedUrls={selectedUrls}
+              onToggleSelect={handleToggleSelect}
+            />
+          </div>
+
+          <section className={styles.selectedSection}>
+            <div className={styles.selectedHeader}>
+              <h2>Selected image URLs</h2>
+              <span className={styles.counter}>{selectedUrls.length}</span>
+            </div>
+
+            {selectedUrls.length === 0 ? (
+              <div className={styles.emptyState}>
+                Click any image to add its URL here.
+              </div>
+            ) : (
+              <ul className={styles.selectedList}>
+                {selectedUrls.map((url) => (
+                  <li key={url} className={styles.selectedItem}>
+                    {url}
+                  </li>
+                ))}
+              </ul>
+            )}
+          </section>
+        </div>
+      </section>
     </main>
   );
 }

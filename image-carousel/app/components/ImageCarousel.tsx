@@ -1,4 +1,3 @@
-// app/components/ImageCarousel.tsx
 'use client';
 
 import Image from 'next/image';
@@ -38,6 +37,10 @@ export const ImageCarousel: React.FC<ImageCarouselProps> = ({
     return () => window.removeEventListener('resize', updateVisibleCount);
   }, []);
 
+  if (!images.length) {
+    return null;
+  }
+
   const total = images.length;
 
   const handleNext = () => {
@@ -57,23 +60,22 @@ export const ImageCarousel: React.FC<ImageCarouselProps> = ({
     <div className={styles.carousel}>
       <button
         type="button"
-        className={`${styles.navButton} ${styles.prev}`}
+        className={styles.navButton}
         onClick={handlePrev}
+        aria-label="Previous image"
       >
         ‹
       </button>
 
       <div className={styles.viewport}>
         <div className={styles.track}>
-          {visibleImages.map((img) => {
+          {visibleImages.map((img, index) => {
             const isSelected = selectedUrls.includes(img.download_url);
 
             return (
               <div
-                key={img.id}
-                className={`${styles.slide} ${
-                  isSelected ? styles.selected : ''
-                }`}
+                key={`${img.id}-${index}`}
+                className={`${styles.slide} ${isSelected ? styles.selected : ''}`}
                 onClick={() => onToggleSelect(img.download_url)}
               >
                 <Image
@@ -82,8 +84,12 @@ export const ImageCarousel: React.FC<ImageCarouselProps> = ({
                   width={240}
                   height={160}
                   className={styles.image}
+                  loading="eager"
                 />
-                
+                <div className={styles.overlay}></div>
+                <div className={styles.caption}>
+                  <span>{img.author}</span>
+                </div>
               </div>
             );
           })}
@@ -92,8 +98,9 @@ export const ImageCarousel: React.FC<ImageCarouselProps> = ({
 
       <button
         type="button"
-        className={`${styles.navButton} ${styles.next}`}
+        className={styles.navButton}
         onClick={handleNext}
+        aria-label="Next image"
       >
         ›
       </button>

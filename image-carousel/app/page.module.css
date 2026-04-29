@@ -1,19 +1,83 @@
 .main {
   min-height: 100vh;
-  padding: 40px 16px 80px;
-  background: radial-gradient(circle at top, #1f2937, #020617);
-  color: #e5e7eb;
+  position: relative;
+  overflow: hidden;
+  padding: 32px 16px;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  gap: 24px;
+  justify-content: center;
+  background:
+    radial-gradient(circle at top left, rgba(249, 172, 103, 0.22), transparent 30%),
+    radial-gradient(circle at bottom right, rgba(238, 106, 89, 0.18), transparent 28%),
+    linear-gradient(135deg, #3a3f58 0%, #2f3449 45%, #272b3d 100%);
+  color: #ece6cd;
+}
+
+.pageGlow {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(249, 172, 103, 0.14), transparent 20%),
+    radial-gradient(circle at 80% 70%, rgba(238, 106, 89, 0.12), transparent 24%);
+  pointer-events: none;
+}
+
+.wrapper {
+  width: 100%;
+  max-width: 1220px;
+  position: relative;
+  z-index: 1;
+}
+
+.card {
+  width: 100%;
+  margin: 0 auto;
+  padding: 28px;
+  border-radius: 28px;
+  background:
+    linear-gradient(180deg, rgba(236, 230, 205, 0.12), rgba(236, 230, 205, 0.06));
+  border: 1px solid rgba(236, 230, 205, 0.16);
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.28),
+    0 0 0 1px rgba(249, 172, 103, 0.06) inset;
+  backdrop-filter: blur(10px);
+}
+
+.eyebrow {
+  margin-bottom: 10px;
+  color: #f9ac67;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
 }
 
 .title {
-  font-size: 28px;
-  font-weight: 700;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
+  margin: 0;
+  font-size: clamp(2rem, 4vw, 3.4rem);
+  line-height: 1;
+  font-weight: 800;
+  color: #ece6cd;
+}
+
+.subtitle {
+  margin-top: 12px;
+  margin-bottom: 26px;
+  max-width: 700px;
+  color: rgba(236, 230, 205, 0.8);
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.carouselShell {
+  padding: 18px;
+  border-radius: 22px;
+  background:
+    linear-gradient(135deg, rgba(58, 63, 88, 0.92), rgba(45, 49, 68, 0.95));
+  border: 1px solid rgba(249, 172, 103, 0.15);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.04),
+    0 18px 30px rgba(0, 0, 0, 0.16);
 }
 
 .center {
@@ -21,19 +85,57 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #e5e7eb;
-  background: #020617;
+  background: #3a3f58;
+  color: #ece6cd;
+  font-size: 18px;
 }
 
 .selectedSection {
+  margin-top: 24px;
   width: 100%;
-  max-width: 960px;
+  padding: 18px;
+  border-radius: 20px;
+  background: rgba(58, 63, 88, 0.55);
+  border: 1px solid rgba(236, 230, 205, 0.1);
 }
 
-.selectedSection h2 {
-  margin-bottom: 8px;
+.selectedHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.selectedHeader h2 {
+  margin: 0;
   font-size: 18px;
-  font-weight: 600;
+  font-weight: 700;
+  color: #ece6cd;
+}
+
+.counter {
+  min-width: 34px;
+  height: 34px;
+  padding: 0 10px;
+  border-radius: 999px;
+  background: #ee6a59;
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 700;
+  box-shadow: 0 10px 20px rgba(238, 106, 89, 0.28);
+}
+
+.emptyState {
+  padding: 18px;
+  border-radius: 16px;
+  background: rgba(236, 230, 205, 0.06);
+  color: rgba(236, 230, 205, 0.72);
+  text-align: center;
+  border: 1px dashed rgba(249, 172, 103, 0.24);
 }
 
 .selectedList {
@@ -42,16 +144,56 @@
   margin: 0;
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 10px;
 }
 
 .selectedItem {
-  padding: 6px 10px;
-  border-radius: 8px;
-  background: rgba(15, 23, 42, 0.8);
-  font-size: 12px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: linear-gradient(
+    135deg,
+    rgba(238, 106, 89, 0.18),
+    rgba(249, 172, 103, 0.14)
+  );
+  border: 1px solid rgba(249, 172, 103, 0.18);
+  color: #ece6cd;
+  font-size: 13px;
+  line-height: 1.5;
   word-break: break-all;
-  transform: translateY(4px);
-  opacity: 0;
-  animation: fadeInUp 0.3s ease forwards;
+  animation: fadeInUp 0.28s ease forwards;
+  box-shadow: 0 10px 18px rgba(0, 0, 0, 0.08);
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .main {
+    padding: 20px 12px;
+  }
+
+  .card {
+    padding: 18px;
+    border-radius: 22px;
+  }
+
+  .carouselShell {
+    padding: 12px;
+  }
+
+  .selectedSection {
+    padding: 14px;
+  }
+
+  .subtitle {
+    font-size: 14px;
+  }
 }
