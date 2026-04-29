@@ -89,7 +89,7 @@ export const ImageCarousel: React.FC<ImageCarouselProps> = ({
                 </div>
 
                 <div className={styles.overlay}></div>
-                <div className={styles.caption}>{img.author}</div>
+                
               </div>
             );
           })}
